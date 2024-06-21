@@ -4,7 +4,6 @@
 This template allows you to instantly deploy a fullstack web app with golang on AWS ECS, Kubernetes or docker compose
 
 ## TODOs:
-- [ ] Rebranding script for fast reuse
 - [ ] docker build
 - [ ] build
 - [ ] grpc boilerplate

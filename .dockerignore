@@ -1,0 +1,6 @@
+*/
+!dockerfiles/
+!config/
+!src/
+!go.mod
+!go.sum
