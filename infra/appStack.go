@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecspatterns"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
+	"github.com/spf13/viper"
 )
 
 var vpc awsec2.Vpc
@@ -19,6 +20,9 @@ func appStack(scope constructs.Construct, id string, props *awscdk.NestedStackPr
 	appCluster := awsecs.NewCluster(stack, jsii.String("template-app-cluster"), &awsecs.ClusterProps{
 		Vpc: vpc,
 	})
+
+	settings := viper.AllSettings()
+	cdkSettings := toPointerMap(settings)
 
 	// Backend task
 	awsecspatterns.NewApplicationLoadBalancedFargateService(
@@ -38,6 +42,7 @@ func appStack(scope constructs.Construct, id string, props *awscdk.NestedStackPr
 					Platform: awsecrassets.Platform_LINUX_ARM64(),
 				}),
 				ContainerPort: jsii.Number(8080),
+				Environment:   cdkSettings,
 			},
 			MemoryLimitMiB:     jsii.Number(512),
 			PublicLoadBalancer: jsii.Bool(true),

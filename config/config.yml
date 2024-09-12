@@ -1,2 +1,5 @@
+# Only change once at start of project, else deployment will be fucked up
+# Only use strings as values
+
 project-id-slug: "template"
 project-name: "AWS-CDK-Web-App-Template"

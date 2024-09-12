@@ -5,6 +5,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
+	"github.com/spf13/viper"
 	"os"
 	"strings"
 	"time"
@@ -43,6 +44,8 @@ func getLambdas(stack constructs.Construct, stage string) []*apiFunctionResource
 }
 
 func buildLambda(stack constructs.Construct, path, stage string) (awslambda.IFunction, string) {
+	configMap := toPointerMap(viper.AllSettings())
+
 	name := path + "-" + stage
 	functionProps := &awslambda.FunctionProps{
 		FunctionName: &name,
@@ -53,10 +56,7 @@ func buildLambda(stack constructs.Construct, path, stage string) (awslambda.IFun
 		CurrentVersionOptions: &awslambda.VersionOptions{
 			RemovalPolicy: awscdk.RemovalPolicy_DESTROY,
 		},
-		Environment: &map[string]*string{
-			"STAGE":      s(stage),
-			"STACK_NAME": s(appName),
-		},
+		Environment: configMap,
 	}
 
 	return awslambda.NewFunction(stack, jsii.String(path+"-lambda-"+stage), functionProps), path

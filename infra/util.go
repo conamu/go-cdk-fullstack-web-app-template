@@ -46,3 +46,12 @@ func awsEnv() *awscdk.Environment {
 		Region:  s(viper.GetString("aws-region")),
 	}
 }
+
+func toPointerMap(val map[string]any) *map[string]*string {
+	pm := make(map[string]*string)
+	for k, v := range val {
+		sv := v.(string)
+		pm[k] = &sv
+	}
+	return &pm
+}
