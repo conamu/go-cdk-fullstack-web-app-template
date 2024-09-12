@@ -4,6 +4,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
+	"github.com/spf13/viper"
 	"regexp"
 )
 
@@ -11,7 +12,7 @@ type stackProps struct {
 	awscdk.StackProps
 }
 
-const appName = "AWS-CDK-Template"
+var appName = viper.GetString("project-name")
 
 var stage string
 var StackName string
@@ -37,4 +38,11 @@ func removeNumbersAndSpecialChars(input string) string {
 
 func buildApplicationName() string {
 	return appName + "-" + stage
+}
+
+func awsEnv() *awscdk.Environment {
+	return &awscdk.Environment{
+		Account: s(viper.GetString("aws-account")),
+		Region:  s(viper.GetString("aws-region")),
+	}
 }

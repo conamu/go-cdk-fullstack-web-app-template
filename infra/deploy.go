@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/jsii-runtime-go"
@@ -17,14 +16,12 @@ func main() {
 
 	env := os.Getenv("ENV")
 	config.Init(env)
-	projectId := viper.GetString("projectId")
-	loglevel := viper.GetString("loglevel")
+	projectId := viper.GetString("project-id-slug")
 
-	fmt.Println(loglevel)
 	app := awscdk.NewApp(nil)
 
 	stack := awscdk.NewStack(app, s(projectId), &awscdk.StackProps{
-		Env:         awsenv(),
+		Env:         awsEnv(),
 		Description: s(projectId),
 	})
 

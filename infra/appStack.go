@@ -71,11 +71,3 @@ func appStack(scope constructs.Construct, id string, props *awscdk.NestedStackPr
 	)
 	return stack
 }
-
-func awsenv() *awscdk.Environment {
-
-	return &awscdk.Environment{
-		Account: jsii.String("038796470268"),
-		Region:  jsii.String("eu-west-1"),
-	}
-}
