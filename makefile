@@ -14,3 +14,6 @@ destroy:
 
 deploy: build
 	./deploy-all.sh
+
+db-up:
+	docker-compose -f db-compose.yml up --force-recreate
