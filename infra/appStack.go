@@ -31,7 +31,7 @@ func appStack(scope constructs.Construct, id string, props *awscdk.NestedStackPr
 				OperatingSystemFamily: awsecs.OperatingSystemFamily_LINUX(),
 			},
 			Cpu:          jsii.Number(256),
-			DesiredCount: jsii.Number(3),
+			DesiredCount: jsii.Number(1),
 			TaskImageOptions: &awsecspatterns.ApplicationLoadBalancedTaskImageOptions{
 				Image: awsecs.ContainerImage_FromAsset(jsii.String("."), &awsecs.AssetImageProps{
 					File:     jsii.String("./dockerfiles/be.Dockerfile"),
@@ -56,7 +56,7 @@ func appStack(scope constructs.Construct, id string, props *awscdk.NestedStackPr
 				OperatingSystemFamily: awsecs.OperatingSystemFamily_LINUX(),
 			},
 			Cpu:          jsii.Number(256),
-			DesiredCount: jsii.Number(3),
+			DesiredCount: jsii.Number(1),
 			TaskImageOptions: &awsecspatterns.ApplicationLoadBalancedTaskImageOptions{
 				Image: awsecs.ContainerImage_FromAsset(jsii.String("."), &awsecs.AssetImageProps{
 					File:     jsii.String("./dockerfiles/fe.Dockerfile"),
@@ -66,13 +66,13 @@ func appStack(scope constructs.Construct, id string, props *awscdk.NestedStackPr
 			},
 			MemoryLimitMiB:     jsii.Number(512),
 			PublicLoadBalancer: jsii.Bool(true),
-			ListenerPort:       jsii.Number(443),
+			ListenerPort:       jsii.Number(80),
 		},
 	)
 	return stack
 }
 
-func env() *awscdk.Environment {
+func awsenv() *awscdk.Environment {
 
 	return &awscdk.Environment{
 		Account: jsii.String("038796470268"),
