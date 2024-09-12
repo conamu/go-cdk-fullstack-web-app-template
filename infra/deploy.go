@@ -28,7 +28,7 @@ func main() {
 	// This is necessary to be able to use git branch names in cloudformation stacks
 	stage = removeNumbersAndSpecialChars(stage)
 
-	StackName = buildApplicationName()
+	stackName = buildApplicationName()
 
 	requireApiKey := true
 
@@ -42,7 +42,7 @@ func main() {
 	for _, meta := range lambdaApiMeta {
 		meta.apiFunctionVersion.GrantInvoke(awsiam.NewServicePrincipal(s("apigateway.amazonaws.com"), &awsiam.ServicePrincipalOpts{}))
 	}
-	ApiGatewayRoot := buildApiGateway(stack, StackName)
+	ApiGatewayRoot := buildApiGateway(stack, stackName)
 
 	buildApiResources(stack, ApiGatewayRoot, lambdaApiMeta, requireApiKey, stage)
 

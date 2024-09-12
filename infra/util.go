@@ -15,7 +15,7 @@ type stackProps struct {
 var appName = viper.GetString("project-name")
 
 var stage string
-var StackName string
+var stackName string
 
 func s(s string) *string {
 	return jsii.String(s)
