@@ -9,6 +9,9 @@ This template allows you to instantly deploy a fullstack web app with golang on 
 - [X] config system setup
 - [X] cdk deployment through fargate ecs with ALB
 - [X] cdk deployment with Lambda and API gateway
-- [ ] docker-compose deployment template
+- [ ] docker-compose local deployment template
 - [X] database script init
 - [ ] http api boilerplate
+- [ ] frontend boilerplate
+- [ ] sql boilerplate
+- [ ] cache boilerplate
